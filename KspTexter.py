@@ -1,61 +1,7 @@
 import os
 import sys
+from utils import *
 
-RED = "\033[0;31m"
-GREEN =  "\033[0;32m"
-RESET = "\033[0m"
-#--------------------------INIT---------------------------
-current_dir = ""
-png_files = []
-all_controls = []
-
-FRAME_PER_TYPE = {
-    "background": 1,
-    "icon": 1,
-    "button": 6,
-    "switch": 6,
-    "menu": 6,
-}
-
-
-def fixed_frames(split_name):
-    if split_name[1] in ["background","icon"]:
-        all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":FRAME_PER_TYPE[split_name[1]]})
-    elif split_name[1] in ["button", "switch", "menu"]:
-        all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":FRAME_PER_TYPE[split_name[1]]})
-    elif split_name[1] in ["slider", "label" ]:
-        print(f'{RED}this type of ui {GREEN}{split_name[1]}{RED} in the file {GREEN}{png_item}.png {RED}needs one extra parameter for the frames number{RESET}')
-    elif not split_name[1] in FRAME_PER_TYPE.keys():
-        print(f'{RED}invalid UI type: {GREEN}{split_name[1]}{RED} in the file {GREEN}{png_item}.png{RESET}')
-
-def flexible_frames(split_name):
-    if split_name[1] in ["slider", "label"]:
-        if not split_name[2].isdigit():
-            print(f'{RED}Format Error in: {GREEN}{png_item}.png{RED} - 3rd argument after _ should be a numeric valyle (Number of frames){RESET}')
-        else:
-            all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":split_name[2]})
-    elif split_name[1] in ["button","switch" ,"menu" ,"icon" ,"background"]:
-        print(f'{RED}the type: {GREEN}{split_name[1]}{RED} in {GREEN}{png_item}.png {RED}doesn\'t need the number of frames in it\'s name{RESET}')
-    elif not split_name[1] in FRAME_PER_TYPE.keys():
-        print(f'{RED}invalid UI type: {GREEN}{split_name[1]}{RED} in the file {GREEN}{png_item}.png{RESET}')
-
-#function that creates a .txt file and fills it with the right information
-def txt_maker(control):
-    with open((control["full_name"] + ".txt"), "w") as file:
-        file.write("Has Alpha Channel: yes\n")
-        file.write(f'Number of Animations: {control["frames"]}\n')
-        file.write("Horizontal Animation: no\n")
-        file.write("Vertical Resizable: no\n")
-        file.write("Horizontal Resizable: no\n")
-        file.write("Fixed Top: 0\n")
-        file.write("Fixed Bottom: 0\n")
-        file.write("Fixed Left: 0\n")
-        file.write("Fixed Right: 0\n")
-
-#class ui_control for each control component
-
-
-#--------------------------CODE---------------------------
 
 #Get current directory of the executable OR script
 if getattr(sys, 'frozen', False):
@@ -76,9 +22,9 @@ if not len(png_files):
 for png_item in png_files:
     split_name = png_item.split("_")
     if len(split_name) == 2:
-        fixed_frames(split_name)
+        fixed_frames(split_name, png_item)
     elif len(split_name) == 3:
-        flexible_frames(split_name)
+        flexible_frames(split_name, png_item)
     else:
         print(f'{RED}Wrong format for the file {GREEN}{png_item}.png{RESET}')
 
