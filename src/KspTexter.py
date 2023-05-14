@@ -60,7 +60,7 @@ if not len(png_files):
     print(f'{RED}Could not find any .PNG files in the current folder{RESET}')
     sys.exit()
 
-#create objects for each ui_control with the appropriate file_name, type, ui name and frames number
+#creates a dict for each ui element with the appropriate: filename, type and number of frames
 for png_item in png_files:
     split_name = png_item.split("_")
     if len(split_name) == 2:
