@@ -21,10 +21,8 @@ FRAME_PER_TYPE = {
 def fixed_frames(split_name):
     if split_name[1] in ["background","icon"]:
         all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":FRAME_PER_TYPE[split_name[1]]})
-
     elif split_name[1] in ["button", "switch", "menu"]:
         all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":FRAME_PER_TYPE[split_name[1]]})
-
     elif split_name[1] in ["slider", "label" ]:
         print(f'{RED}this type of ui {GREEN}{split_name[1]}{RED} in the file {GREEN}{png_item}.png {RED}needs one extra parameter for the frames number{RESET}')
     elif not split_name[1] in FRAME_PER_TYPE.keys():
@@ -36,7 +34,6 @@ def flexible_frames(split_name):
             print(f'{RED}Format Error in: {GREEN}{png_item}.png{RED} - 3rd argument after _ should be a numeric valyle (Number of frames){RESET}')
         else:
             all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":split_name[2]})
-
     elif split_name[1] in ["button","switch" ,"menu" ,"icon" ,"background"]:
         print(f'{RED}the type: {GREEN}{split_name[1]}{RED} in {GREEN}{png_item}.png {RED}doesn\'t need the number of frames in it\'s name{RESET}')
     elif not split_name[1] in FRAME_PER_TYPE.keys():
