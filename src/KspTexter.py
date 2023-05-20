@@ -1,5 +1,4 @@
-import os
-import sys
+
 from utils import *
 
 current_dir = ""
@@ -15,6 +14,8 @@ FRAME_PER_TYPE = {
     "slider": None,
     "label": None
 }
+
+current_dir = get_current_dir()
 
 #for background-icon-button-switch-menu
 def fixed_frames(split_name, png_item):
@@ -43,13 +44,6 @@ def flexible_frames(split_name, png_item):
             return
         else:
             all_controls.append({"full_name":png_item, "ui_name":split_name[0], "frames":split_name[2]})
-
-
-#Get current directory of the executable OR script
-if getattr(sys, 'frozen', False):
-    current_dir = os.path.dirname(sys.executable)
-else:
-    current_dir = os.path.dirname(os.path.abspath(__file__))
 
 #finds and stores all png files in a list
 for file in os.listdir(current_dir):
