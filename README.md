@@ -9,7 +9,7 @@ Kontakt-KSPTexter is a Python script that generates the appropriate .txt files f
 3. Run `python3 KspTexter.py`
 4. The script will generate all the appropriate .txt files in the same folder. The files will be initialized with the proper name and number of frames, with all other parameters default to 0/no (except for alpha, which is set to "yes").
 
-## -2- From executable
+## -2- From executable (Only runs on MacOS)
 1. Copy KspTexter executable from the exec folder, to the folder with the .png files
 2. Run the executable (double click)
 ## Naming Conventions
